@@ -3,7 +3,6 @@ import speech_recognition as sr
 
 
 def speech_to_text():
-    # Create a recognizer instance
     r = sr.Recognizer()
 
     # Use the microphone as the audio source
@@ -12,7 +11,6 @@ def speech_to_text():
         r.adjust_for_ambient_noise(source, duration=0.5)
         audio = r.listen(source)
 
-    # Recognize the speech in the audio
     try:
         return r.recognize_google(audio)
     except sr.UnknownValueError:
