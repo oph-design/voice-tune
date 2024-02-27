@@ -1,52 +1,39 @@
 import asyncio
 import sys
+import os
+import pandas as pd
 
 from kuksa_client.grpc import Datapoint
 from kuksa_client.grpc.aio import VSSClient
 
-client = VSSClient("127.0.0.1", 55556)
+client = VSSClient("127.0.0.1", 55555)
 
 
-async def changeTilt(delta: float):
-    current_values = await client.get_current_values(
-        ["Vehicle.Cabin.Seat.Row1.DriverSide.Tilt"]
-    )
-    if current_values is None:
-        return
-    new_value = current_values["Vehicle.Cabin.Seat.Row1.DriverSide.Tilt"].value + delta
+async def changeValue(target, delta):
+    # if not 0 <= delta <= 65535:
+    #     print("Delta must be within uint16 range (0-65535).")
+    #      return
+    current_obj = (await client.get_current_values([target]))[target]
+    current_value = 0
+    if current_obj is not None:
+        current_value = current_obj.value
+    new_value = current_value + delta
     print(new_value)
     await client.set_current_values(
         {
-            "Vehicle.Cabin.Seat.Row1.DriverSide.Tilt": Datapoint(new_value),
-        }
-    )
-
-async def changePosition(delta: int):
-    if not 0 <= delta <= 65535:
-        print("Delta must be within uint16 range (0-65535).")
-        return
-    current_values = await client.get_current_values(
-        ["Vehicle.Cabin.Seat.Row1.DriverSide.Position"]
-    )
-    if current_values is None:
-        return
-    new_value = current_values["Vehicle.Cabin.Seat.Row1.DriverSide.Position"].value + delta
-    print(new_value)
-    await client.set_current_values(
-        {
-            "Vehicle.Cabin.Seat.Row1.DriverSide.Position": Datapoint(new_value),
+            target: Datapoint(new_value),
         }
     )
 
 
 async def main():
     await client.connect()
-    target = sys.argv[1]
+    home = os.environ["PWD"]
+    data = pd.read_csv(home + "/ressources/datapoints.csv")
+    print(data.head())
+    target = data.loc[data["key"] == sys.argv[1], "value"].values[0]
     print(target)
-    if target == "tilt":
-        await changeTilt(float(sys.argv[2]))
-    if target == "position":
-        await changePosition(int(sys.argv[2]))
+    await changeValue(target, float(sys.argv[2]))
 
 
 asyncio.run(main())

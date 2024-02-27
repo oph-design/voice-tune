@@ -1,0 +1,13 @@
+key,value
+seatinglength,Vehicle.Cabin.Seat.Row1.DriverSide.Seating.Length
+height,Vehicle.Cabin.Seat.Row1.DriverSide.Height
+headrestheigth,Vehicle.Cabin.Seat.Row1.DriverSide.Headrest.Height
+backrestlumbar,Vehicle.Cabin.Seat.Row1.DriverSide.Backrest.Lumbar.Support
+sidebolster,Vehicle.Cabin.Seat.Row1.DriverSide.Backrest.SideBolster.Support
+backrestrecline,Vehicle.Cabin.Seat.Row1.DriverSide.Backrest.Recline
+headrestangle,Vehicle.Cabin.Seat.Row1.DriverSide.Headrest.Angle
+backrestlumbarheight,Vehicle.Cabin.Seat.Row1.DriverSide.Backrest.Lumbar.Height
+massage,Vehicle.Cabin.Seat.Row1.DriverSide.Massage
+tilt,Vehicle.Cabin.Seat.Row1.DriverSide.Tilt
+position,Vehicle.Cabin.Seat.Row1.DriverSide.Position
+heating,Vehicle.Cabin.Seat.Row1.DriverSide.Heating
