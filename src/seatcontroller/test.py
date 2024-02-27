@@ -4,7 +4,7 @@ import sys
 from kuksa_client.grpc import Datapoint
 from kuksa_client.grpc.aio import VSSClient
 
-client = VSSClient("127.0.0.1", 55555)
+client = VSSClient("127.0.0.1", 55556)
 
 
 async def changeTilt(delta: float):
@@ -21,6 +21,23 @@ async def changeTilt(delta: float):
         }
     )
 
+async def changePosition(delta: int):
+    if not 0 <= delta <= 65535:
+        print("Delta must be within uint16 range (0-65535).")
+        return
+    current_values = await client.get_current_values(
+        ["Vehicle.Cabin.Seat.Row1.DriverSide.Position"]
+    )
+    if current_values is None:
+        return
+    new_value = current_values["Vehicle.Cabin.Seat.Row1.DriverSide.Position"].value + delta
+    print(new_value)
+    await client.set_current_values(
+        {
+            "Vehicle.Cabin.Seat.Row1.DriverSide.Position": Datapoint(new_value),
+        }
+    )
+
 
 async def main():
     await client.connect()
@@ -28,6 +45,8 @@ async def main():
     print(target)
     if target == "tilt":
         await changeTilt(float(sys.argv[2]))
+    if target == "position":
+        await changePosition(int(sys.argv[2]))
 
 
 asyncio.run(main())
