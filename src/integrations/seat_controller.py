@@ -10,7 +10,7 @@ client = VSSClient("127.0.0.1", 55555)
 
 async def changeValue(delta, data, context):
     if data[3] == "mm":
-        delta = delta / 10
+        delta = delta * 10
     current_obj = (await client.get_current_values([data[0]]))[data[0]]
     current_value = 0
     if current_obj is not None:
