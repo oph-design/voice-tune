@@ -23,10 +23,10 @@ def build_model():
         parameters={
             "type": "object",
             "properties": {
-                "position": {
-                    "type": "string",
-                    "description": "The position to set, for example '20 degrees forward' or '20 degrees backward' or a bit"
-                },
+                # "position": {
+                #     "type": "string",
+                #     "description": "The position to set, for example '20 degrees forward' or '20 degrees backward' or a bit"
+                # },
                 "device": {
                     "type": "string",
                     "enum": ["seat",],
@@ -40,9 +40,15 @@ def build_model():
                     "type": "string",
                     "enum": ["forward", "backward", "up", "down", "invalid"],
                     "description": "The direction to set, for example 'forward' or 'backward', 'up', 'down', or 'invalid'"
-                }
+                },
+                "response": {
+                    "type": "string",
+                    "description": "To be passed back to Text to Speech as a verification for taking an action." +
+                     "examples: 'Okay.. Moving the seat forward by 20 degrees', 'I'm moving the seat backwards by a bit' or 'I didn't understand that, can you repeat?'." +
+                     " When the direction or the query doesn't make sense or is invalid, the response can be something like this: 'I didn't understand that, can you repeat?'."
+                },
             },
-            "required": ["query", "device"]
+            "required": ["query", "device", "response", "direction"]
         },
     )
 
@@ -75,7 +81,7 @@ def train_model(data, model, gametime_tool):
         # Call the model for inference
         model_response = model.generate_content(
             record.get('prompt'),
-            generation_config={"temperature": 0.05},
+            generation_config={"temperature": 0.15},
             tools=[gametime_tool],
         )
         if (not model_response.candidates[0].content.parts[0].function_call.args):
@@ -111,20 +117,20 @@ def train_model(data, model, gametime_tool):
 def predict(model, gametime_tool, prompt):
     model_response = model.generate_content(
         prompt,
-        generation_config={"temperature": 0.05},
+        generation_config={"temperature": 0.15},
         tools=[gametime_tool],
     )
-
     try:
         if (not model_response.candidates[0].content.parts[0].function_call.args):
             return None, 0
         args = model_response.candidates[0].content.parts[0].function_call.args.pb
+        print(args)
         predicted_direction = args.get("direction").string_value
+        predicted_response = args.get("response").string_value
         if (not args.get("degree")):
-            return predicted_direction, 1
+            return predicted_response, predicted_direction, 1
         predicted_degree = float(args.get("degree").number_value)
-        return predicted_direction, predicted_degree
+        return predicted_response, predicted_direction, predicted_degree
     except Exception as e:
-        print("I did not understand the query")
         print(e)
         return None, 0
