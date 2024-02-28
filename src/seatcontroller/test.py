@@ -4,7 +4,7 @@ import os
 import pandas as pd
 
 from kuksa_client.grpc import Datapoint
-from kuksa_client.grpc.aio import VSSClient
+from kuksa_client.grpc.aio import Metadata, VSSClient
 
 client = VSSClient("127.0.0.1", 55555)
 
