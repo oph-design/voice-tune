@@ -5,7 +5,7 @@ import pandas as pd
 from kuksa_client.grpc import Datapoint
 from kuksa_client.grpc.aio import VSSClient
 
-client = VSSClient("127.0.0.1", 55555)
+client = VSSClient("127.0.0.1", 55556)
 
 
 async def changeValue(delta, data):
