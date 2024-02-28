@@ -1,9 +1,17 @@
+import asyncio
 from integrations import (
-    speech_to_text, init_generative_model, query_model, train_model,
-    load_data, build_model, predict
+    speech_to_text,
+    init_generative_model,
+    query_model,
+    train_model,
+    load_data,
+    build_model,
+    predict,
+    seat_controller,
 )
 
-def main():
+
+async def main():
     # speech = speech_to_text()
     # print(f"Speech: {speech}")
     ## TODO: I think we should initialize the model once in the beginning of the program, not everytime we want to use it
@@ -35,11 +43,14 @@ def main():
         "move my seat in party mode",
     ]
     import time
+
     for query in test_data:
         prediction = predict(model, tool, query)
         print(f"Query: {query}, Prediction: {prediction}")
         time.sleep(5)
     # prediction = predict(model, tool, "move the seat back by 45 degrees.")
     # print(prediction)
+
+
 if __name__ == "__main__":
-    main()
+    asyncio.run(main())
