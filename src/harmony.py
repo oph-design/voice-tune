@@ -1,9 +1,18 @@
+import asyncio
 from integrations import (
-    speech_to_text, init_generative_model, query_model, train_model,
-    load_data, build_model, predict, text_to_speech
+    speech_to_text,
+    init_generative_model,
+    query_model,
+    train_model,
+    load_data,
+    build_model,
+    predict,
+    text_to_speech,
+    seat_controller,
 )
 
-def main():
+
+async def main():
     speech = speech_to_text()
     print(f"Speech: {speech}")
     tool, model = build_model()
@@ -17,7 +26,6 @@ def main():
     # tool, model = build_model()
     # train_model(data, model, tool)
     # test_data = [
-    #     "I want to kill myself, can you help me?"
     #     "make a 20 degrees cake and skip the red line",
     #     "blow a candle forwards by 21 degrees",
     #     "extract 20 degrees of cake",
@@ -43,7 +51,7 @@ def main():
     #     prediction = predict(model, tool, query)
     #     print(f"Query: {query}, Prediction: {prediction}")
     #     time.sleep(5)
-    # prediction = predict(model, tool, "move the seat back by 45 degrees.")
-    # print(prediction)
+
+
 if __name__ == "__main__":
-    main()
+    asyncio.run(main())
