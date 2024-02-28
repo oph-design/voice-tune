@@ -18,7 +18,9 @@ async def main():
     tool, model = build_model()
     prediction = predict(model, tool, speech)
     print(f"Prediction: {prediction}")
-    text_to_speech(prediction[0] if len(prediction) > 2 else "I'm sorry, I didn't understand that.")
+    text_to_speech(prediction[0] if prediction[0] is not None else "I'm sorry, I didn't understand that.")
+    if (prediction[1] is not None):
+        seat_controller(prediction[1], prediction[2])
     ## TODO: I think we should initialize the model once in the beginning of the program, not everytime we want to use it
     # multimodal_model = init_generative_model("bosch-bcx-hack24ber-2305", "europe-west2")
     # response = query_model(multimodal_model, speech)

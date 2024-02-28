@@ -122,7 +122,7 @@ def predict(model, gametime_tool, prompt):
     )
     try:
         if (not model_response.candidates[0].content.parts[0].function_call.args):
-            return None, 0
+            return None, None, 0
         args = model_response.candidates[0].content.parts[0].function_call.args.pb
         print(args)
         predicted_direction = args.get("direction").string_value
@@ -133,4 +133,4 @@ def predict(model, gametime_tool, prompt):
         return predicted_response, predicted_direction, predicted_degree
     except Exception as e:
         print(e)
-        return None, 0
+        return None, None, 0
