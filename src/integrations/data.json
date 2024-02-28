@@ -1,0 +1,122 @@
+[
+    {
+        "prompt": "Move the seat forward by 10 degrees",
+        "action": "forward",
+        "value": 10
+    },
+    {
+        "prompt": "Move the seat backward by 10 degrees",
+        "action": "backward",
+        "value": 10
+    },
+    {
+        "prompt": "Move the seat up by 10 degrees",
+        "action": "up",
+        "value": 10
+    },
+    {
+        "prompt": "Move the seat down by 10 degrees",
+        "action": "down",
+        "value": 10
+    },
+    {
+        "prompt": "Move the seat forward by 20 degrees",
+        "action": "forward",
+        "value": 20
+    },
+    {
+        "prompt": "Move the seat backward by 20 degrees",
+        "action": "backward",
+        "value": 20
+    },
+    {
+        "prompt": "Move the seat up by 20 degrees",
+        "action": "up",
+        "value": 20
+    },
+    {
+        "prompt": "Move the seat down by 20 degrees",
+        "action": "down",
+        "value": 20
+    },
+    {
+        "prompt": "Move the seat 2 meters up",
+        "action": "invalid",
+        "value": 0
+    },
+    {
+        "prompt": "Move the seat 2 meters down",
+        "action": "invalid",
+        "value": 0
+    },
+    {
+        "prompt": "Move the seat a bit forward",
+        "action": "forward",
+        "value": 1
+    },
+    {
+        "prompt": "Move the seat a bit backward",
+        "action": "backward",
+        "value": 1
+    },
+    {
+        "prompt": "Move the seat a bit up",
+        "action": "up",
+        "value": 1
+    },
+    {
+        "prompt": "Move the seat a bit down",
+        "action": "down",
+        "value": 1
+    },
+    {
+        "prompt": "Move the seat a little forward",
+        "action": "forward",
+        "value": 1
+    },
+    {
+        "prompt": "Move the seat a little backward",
+        "action": "backward",
+        "value": 1
+    },
+    {
+        "prompt": "Move the seat a little up",
+        "action": "up",
+        "value": 1
+    },
+    {
+        "prompt": "Move the seat a little down",
+        "action": "down",
+        "value": 1
+    },
+    {
+        "prompt": "Move the seat a lot forward",
+        "action": "forward",
+        "value": 10
+    },
+    {
+        "prompt": "Move the seat a lot backward",
+        "action": "backward",
+        "value": 10
+    },
+    {
+        "prompt": "Move the seat a lot up",
+        "action": "up",
+        "value": 10
+    },
+    {
+        "prompt": "Move the seat a lot down",
+        "action": "down",
+        "value": 10
+    },
+    {
+        "prompt": "kick me out of the car!",
+        "action": "invalid",
+        "value": 0
+    },
+    {
+        "prompt": "Mars is a planet",
+        "action": "invalid",
+        "value": 0
+    }
+]
